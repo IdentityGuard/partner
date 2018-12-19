@@ -1,0 +1,41 @@
+﻿using Intersections.Billing.Model;
+using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Intersections.Billing.Gateway
+{
+    /// <summary>
+    /// Abstract class to be implemented by different billing providers
+    /// </summary>
+    internal abstract class BillingGateway
+    {
+        /// <summary>
+        /// Base address of Billing Provider REST Api
+        /// </summary>
+        protected internal string baseAddress;
+
+        /// <summary>
+        /// Collection of field names of Billing Provider
+        /// </summary>
+        protected internal NameValueCollection fieldNames;
+
+        /// <summary>
+        /// Get Billing Token from billing provider
+        /// </summary>
+        /// <param name="request">TokenRequest containing billing information</param>
+        /// <param name="apiKey">Api Key provided by billing provider</param>
+        /// <returns></returns>
+        internal abstract Task<TokenResponse> getBillingToken(TokenRequest request, string apiKey);
+
+        /// <summary>
+        /// Translate Billing Provider field names to TokenResponse field names        
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        internal abstract string translateFieldName(string fieldName);
+    }
+}
