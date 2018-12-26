@@ -19,6 +19,11 @@ namespace Intersections.Billing.Gateway
         protected internal string baseAddress;
 
         /// <summary>
+        /// Collection of api Keys of Billing Provider
+        /// </summary>
+        protected internal NameValueCollection apiKeys;
+
+        /// <summary>
         /// Collection of field names of Billing Provider
         /// </summary>
         protected internal NameValueCollection fieldNames;
@@ -29,7 +34,7 @@ namespace Intersections.Billing.Gateway
         /// <param name="request">TokenRequest containing billing information</param>
         /// <param name="apiKey">Api Key provided by billing provider</param>
         /// <returns></returns>
-        internal abstract Task<TokenResponse> getBillingToken(TokenRequest request, string apiKey);
+        internal abstract Task<TokenResponse> getBillingToken(TokenRequest request, bool isTest);
 
         /// <summary>
         /// Translate Billing Provider field names to TokenResponse field names        
@@ -37,5 +42,12 @@ namespace Intersections.Billing.Gateway
         /// <param name="fieldName"></param>
         /// <returns></returns>
         internal abstract string translateFieldName(string fieldName);
+
+        /// <summary>
+        /// Get Api Key based on key name
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        internal abstract string getApiKey(bool isTest);
     }
 }

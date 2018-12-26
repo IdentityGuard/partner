@@ -30,8 +30,8 @@ namespace Intersections.Billing.Test
                 , textState.Text, textPostalCode.Text, textCountry.Text);
 
             BillingToken billingToken = new BillingToken();
-            string intxApiKey = ConfigurationManager.AppSettings["Intersections.Billing.ApiKey"];
-            TokenResponse response = await billingToken.get(request, intxApiKey);
+            bool isTest = true; // read from config file or as desired 
+            TokenResponse response = await billingToken.get(request, isTest);
 
             textResult.Text = response.token;
                                                 

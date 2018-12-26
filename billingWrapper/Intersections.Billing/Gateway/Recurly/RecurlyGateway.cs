@@ -24,6 +24,7 @@ namespace Intersections.Billing.Gateway.Recurly
         {
             this.baseAddress = Properties.AppSettings.recurlyBaseUrl;
             mapFieldNames();
+            setApiKeys();
         }
 
         /// <summary>
@@ -45,13 +46,36 @@ namespace Intersections.Billing.Gateway.Recurly
         }
 
         /// <summary>
+        /// Set the public keys to call recurly
+        /// can be removed later to fetch from a centralized location
+        /// </summary>
+        private void setApiKeys()
+        {
+            this.apiKeys = new NameValueCollection();
+            apiKeys.Add("PRE_PROD", "ewr1-QuQ5jo88WfCpNPz2kTb8ES");
+            apiKeys.Add("PROD", "ewr1-PXf7pbi1Fn8MrkEwUzJGbh");
+        }
+
+        /// <summary>
+        /// Get the recurly key based on Test environment flag        
+        /// </summary>
+        internal override string getApiKey(bool isTest)
+        {
+            if (isTest)
+                return apiKeys["PRE_PROD"];
+            else
+                return apiKeys["PROD"];            
+        }
+
+        /// <summary>
         /// Get Billing Token from Recurly
         /// </summary>
         /// <param name="request">TokenRequest containing billing information</param>
         /// <returns>TokenResponse</returns>
-        internal override async Task<TokenResponse> getBillingToken(TokenRequest request, string apiKey)
+        internal override async Task<TokenResponse> getBillingToken(TokenRequest request, bool isTest)
         {
             string apiPath = Properties.AppSettings.recurlyTokenPath;
+            string apiKey = getApiKey(isTest);
 
             //setup request data
             var formContent = new[]
