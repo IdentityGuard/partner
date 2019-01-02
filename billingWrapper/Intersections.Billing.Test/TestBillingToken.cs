@@ -30,8 +30,8 @@ namespace Intersections.Billing.Test
                 , textState.Text, textPostalCode.Text, textCountry.Text);
 
             BillingToken billingToken = new BillingToken();
-            bool isTest = true; // read from config file or as desired 
-            TokenResponse response = await billingToken.get(request, isTest);
+            bool isPreProd = true; // read from config file or as desired 
+            TokenResponse response = await billingToken.get(request, isPreProd);
 
             textResult.Text = response.token;
                                                 

@@ -25,7 +25,7 @@ namespace Intersections.Billing
         /// </summary>
         /// <param name="tokenRequest">TokenRequest containing billing information</param>
         /// <returns>TokenResponse</returns>
-        public async Task<TokenResponse> get(TokenRequest tokenRequest, bool isTest)
+        public async Task<TokenResponse> get(TokenRequest tokenRequest, bool isPreProd)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace Intersections.Billing
                 {
                     BillingGateway billingGateway = getBillingGateway();
 
-                    return await billingGateway.getBillingToken(tokenRequest, isTest);
+                    return await billingGateway.getBillingToken(tokenRequest, isPreProd);
                 }
             }
             catch(Exception ex)

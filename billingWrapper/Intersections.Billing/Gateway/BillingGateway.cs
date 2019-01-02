@@ -34,7 +34,7 @@ namespace Intersections.Billing.Gateway
         /// <param name="request">TokenRequest containing billing information</param>
         /// <param name="apiKey">Api Key provided by billing provider</param>
         /// <returns></returns>
-        internal abstract Task<TokenResponse> getBillingToken(TokenRequest request, bool isTest);
+        internal abstract Task<TokenResponse> getBillingToken(TokenRequest request, bool isPreProd);
 
         /// <summary>
         /// Translate Billing Provider field names to TokenResponse field names        
@@ -48,6 +48,6 @@ namespace Intersections.Billing.Gateway
         /// </summary>
         /// <param name="fieldName"></param>
         /// <returns></returns>
-        internal abstract string getApiKey(bool isTest);
+        internal abstract string getApiKey(bool isPreProd);
     }
 }

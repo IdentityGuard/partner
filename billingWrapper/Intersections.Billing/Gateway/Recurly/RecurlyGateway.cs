@@ -59,9 +59,9 @@ namespace Intersections.Billing.Gateway.Recurly
         /// <summary>
         /// Get the recurly key based on Test environment flag        
         /// </summary>
-        internal override string getApiKey(bool isTest)
+        internal override string getApiKey(bool isPreProd)
         {
-            if (isTest)
+            if (isPreProd)
                 return apiKeys["PRE_PROD"];
             else
                 return apiKeys["PROD"];            
@@ -72,10 +72,10 @@ namespace Intersections.Billing.Gateway.Recurly
         /// </summary>
         /// <param name="request">TokenRequest containing billing information</param>
         /// <returns>TokenResponse</returns>
-        internal override async Task<TokenResponse> getBillingToken(TokenRequest request, bool isTest)
+        internal override async Task<TokenResponse> getBillingToken(TokenRequest request, bool isPreProd)
         {
             string apiPath = Properties.AppSettings.recurlyTokenPath;
-            string apiKey = getApiKey(isTest);
+            string apiKey = getApiKey(isPreProd);
 
             //setup request data
             var formContent = new[]

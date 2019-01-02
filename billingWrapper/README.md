@@ -16,9 +16,9 @@ private async void method()
             , firstName, lastName, street1, city, state, postalCode, country);
  
   BillingToken billingToken = new BillingToken();            
-  bool isTest = true;    // read from config file or as desired        
+  bool isPreProd = true;    // read from config file or as desired        
  
-  TokenResponse response = await billingToken.get(request, isTest);
+  TokenResponse response = await billingToken.get(request, isPreProd);
  
   string token = response.token;
  
