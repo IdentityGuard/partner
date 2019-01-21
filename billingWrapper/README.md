@@ -12,15 +12,16 @@ using Intersections.Billing.Model;
  
 private async void method() 
 {
-  TokenRequest request = new TokenRequest(cardNumber, expirationYear, expirationMonth, cardCVV
-            , firstName, lastName, street1, city, state, postalCode, country);
- 
-  BillingToken billingToken = new BillingToken();            
-  bool isPreProd = true;    // read from config file or as desired        
- 
+  TokenRequest request = new TokenRequest(textCardNumber.Text.Trim().Replace("-", ""),
+                textYear.Text.Trim(), textMonth.Text.Trim(), textCVV.Text.Trim()
+                , textFirstName.Text.Trim(), textLastName.Text.Trim(), textAddress1.Text.Trim(), textCity.Text.Trim()
+                , textState.Text.Trim(), textPostalCode.Text.Trim(), textCountry.Text.Trim());
+
+  BillingToken billingToken = new BillingToken();
+  bool isPreProd = true; // read from config file or as desired 
+
   TokenResponse response = await billingToken.get(request, isPreProd);
- 
-  string token = response.token;
+  textResult.Text = JsonConvert.SerializeObject(response, Formatting.Indented);
  
   if (response.errors != null)
   {                
@@ -37,12 +38,12 @@ private async void method()
 The application comes with a desktop based testing application. To install the testing application, run "Intersections.Billing.Test.Setup.msi" under folder "Intersections.Billing.Test.Setup\Release" and follow installation instructions to modify the default install location (program files). Once the application is installed run "Intersections.Billing.Test.exe" application which will open a form to provide test data and simulate different conditions.
 
 ## Troubleshooting
-The BillingToken.get() method returns an instance of TokenResponse object. It contains token and the list of error object. If the call succeeded, the "token" will be populated with the token value. If the call fails for any reason, the response will contain the list of errors explaining the field names and error messages. The "token" will be null in the failure scenario.
+The BillingToken.get() method returns an instance of TokenResponse object. It contains billingInfo object and the list of error object. If the call succeeded, the "billingInfo" will be populated with the billingInfo value . If the call fails for any reason, the response will contain the list of errors explaining the field names and error messages. The "billingInfo" will be null in the failure scenario.
 
 #### Sample Error Response
 ```javascript
 {
-"token":null,
+"billingInfo":null,
 "errors":
     [
     { "field":"cardNumber","message":"Number is not a valid credit card number"},
@@ -53,8 +54,25 @@ The BillingToken.get() method returns an instance of TokenResponse object. It co
 
 #### Sample Success Response
 ```javascript
-{ 
-"token":"billingToken",
+{  
+   "billingInfo":{  
+      "token":"ECw34O4vhdUVhwkGoXV7JA",
+      "useHomeAddress":false,
+      "address":{  
+         "street1":"3901 Stonecroft Blvd",
+         "street2":null,
+         "city":"Chantilly",
+         "state":"VA",
+         "zip":"20151"
+      },
+      "creditCard":{  
+         "expirationMonth":"06",
+         "expirationYear":"2019",
+         "type":"mastercard",
+         "lastFour":"1111"
+      }
+   }
+},
 "errors": null
 }
 ```
