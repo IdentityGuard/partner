@@ -5,9 +5,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Configuration;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Intersections.Billing.Gateway.Recurly
@@ -33,14 +30,14 @@ namespace Intersections.Billing.Gateway.Recurly
         private void mapFieldNames()
         {
             this.fieldNames = new NameValueCollection();
-            fieldNames.Add("number","cardNumber");
+            fieldNames.Add("number", "cardNumber");
             fieldNames.Add("year", "expirationYear");
             fieldNames.Add("month", "expirationMonth");
             fieldNames.Add("cvv", "cardCVV");
             fieldNames.Add("first_name", "firstName");
             fieldNames.Add("last_name", "lastName");
-            fieldNames.Add("address1", "street1");            
-            fieldNames.Add("postal_code", "postalCode");            
+            fieldNames.Add("address1", "street1");
+            fieldNames.Add("postal_code", "postalCode");
             fieldNames.Add("key", "apiKey");
             fieldNames.Add("invalid-public-key", "apiKey");
         }
@@ -64,7 +61,7 @@ namespace Intersections.Billing.Gateway.Recurly
             if (isPreProd)
                 return apiKeys["PRE_PROD"];
             else
-                return apiKeys["PROD"];            
+                return apiKeys["PROD"];
         }
 
         /// <summary>
@@ -86,11 +83,11 @@ namespace Intersections.Billing.Gateway.Recurly
                 new KeyValuePair<string, string>("cvv", Convert.ToString(request.cardCVV)),
                 new KeyValuePair<string, string>("first_name", Convert.ToString(request.firstName)),
                 new KeyValuePair<string, string>("last_name", Convert.ToString(request.lastName)),
-                new KeyValuePair<string, string>("address1", Convert.ToString(request.street1)),                
+                new KeyValuePair<string, string>("address1", Convert.ToString(request.street1)),
                 new KeyValuePair<string, string>("city", Convert.ToString(request.city)),
                 new KeyValuePair<string, string>("state", Convert.ToString(request.state)),
                 new KeyValuePair<string, string>("country", Convert.ToString(request.country)),
-                new KeyValuePair<string, string>("postal_code", Convert.ToString(request.postalCode)),            
+                new KeyValuePair<string, string>("postal_code", Convert.ToString(request.postalCode)),
                 new KeyValuePair<string, string>("key", apiKey)
                 };
 
@@ -100,9 +97,11 @@ namespace Intersections.Billing.Gateway.Recurly
             //parse the response body to object
             RecurlyTokenResponse recurlyResponse = JsonConvert.DeserializeObject<RecurlyTokenResponse>(apiResponse.Item2);
 
+
             //prepare TokenResponse object
+            //TokenResponse response = new TokenResponse(recurlyResponse.id, true, creditCard);
             TokenResponse response = new TokenResponse();
-            response.addToken(recurlyResponse.id);
+
             if (recurlyResponse.error != null)
             {
                 if ((recurlyResponse.error.fields != null))
@@ -117,8 +116,30 @@ namespace Intersections.Billing.Gateway.Recurly
                     response.addError(new Error(translateFieldName(recurlyResponse.error.code), recurlyResponse.error.message));
                 }
             }
+            else
+            {
+                //populate the card details for the response from the request 
+                CreditCard creditCard = new CreditCard(request.expirationMonth, request.expirationYear,
+                    getTypeOfCreditCard(request.cardNumber),
+                    request.cardNumber.Substring(request.cardNumber.Length - 4, 4));
+
+                BillingAddress address = new BillingAddress(request.street1, null, request.city,
+                    request.state, request.postalCode);
+
+                BillingInfo billingInfo = new BillingInfo(recurlyResponse.id, false, address, creditCard);
+                response.addBillingInfo(billingInfo);
+            }
 
             return response;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cardNumber"></param>
+        /// <returns></returns>
+        private string getTypeOfCreditCard(string cardNumber)
+        {
+            return Utility.GetCardTypeFromNumber(cardNumber).ToString();
         }
 
         /// <summary>
@@ -130,5 +151,6 @@ namespace Intersections.Billing.Gateway.Recurly
         {
             return !string.IsNullOrEmpty(fieldNames.Get(fieldName)) ? fieldNames[fieldName] : fieldName;
         }
+
     }
 }

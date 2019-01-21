@@ -282,8 +282,9 @@
             this.textResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textResult.ForeColor = System.Drawing.Color.Green;
             this.textResult.Location = new System.Drawing.Point(107, 360);
+            this.textResult.Multiline = true;
             this.textResult.Name = "textResult";
-            this.textResult.Size = new System.Drawing.Size(341, 20);
+            this.textResult.Size = new System.Drawing.Size(341, 275);
             this.textResult.TabIndex = 26;
             // 
             // label13
@@ -300,7 +301,7 @@
             // 
             this.textErrors.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textErrors.ForeColor = System.Drawing.Color.Red;
-            this.textErrors.Location = new System.Drawing.Point(107, 386);
+            this.textErrors.Location = new System.Drawing.Point(107, 641);
             this.textErrors.Multiline = true;
             this.textErrors.Name = "textErrors";
             this.textErrors.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -311,7 +312,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(27, 389);
+            this.label14.Location = new System.Drawing.Point(49, 627);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(40, 13);
             this.label14.TabIndex = 27;
@@ -321,7 +322,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(473, 527);
+            this.ClientSize = new System.Drawing.Size(468, 767);
             this.Controls.Add(this.textErrors);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.textResult);
