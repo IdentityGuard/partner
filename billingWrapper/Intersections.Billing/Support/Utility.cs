@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace Intersections.Billing.Support
 {
@@ -57,48 +56,6 @@ namespace Intersections.Billing.Support
                 //Card type is not supported by our system, return null
                 //(You can modify this code to support more (or less)
                 // card types as it pertains to your application)
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// American Express :- Starting with 34 or 37, length 15 digits.
-        /// Visa :- Starting with 4, length 13 or 16 digits.
-        /// MasterCard :- Numbers either start with the numbers 51 through 55 or with the numbers 2221 through 2720. All have 16 digits
-        /// Discover :- Starting with 6011, length 16 digits or starting with 65, length 15 digits.
-        /// </summary>
-        /// <param name="cardNumber"></param>
-        /// <returns></returns>
-        public static CreditCardType? GetCardTypeFromNumber1(string cardNumber)
-        {
-            cardNumber = cardNumber.Replace("-", "");
-
-            if (cardNumber.StartsWith("4") && (cardNumber.Length == 13 || cardNumber.Length == 16))
-            {
-                return CreditCardType.Visa;
-            }
-            else if (
-                (cardNumber.StartsWith("6011") && cardNumber.Length == 16) ||
-                (cardNumber.StartsWith("65") && cardNumber.Length == 16))
-            {
-                return CreditCardType.Discover;
-            }
-            else if (cardNumber.Length == 15 &&
-                     (cardNumber.StartsWith("34") || cardNumber.StartsWith("37")))
-            {
-                return CreditCardType.Amex;
-            }
-            else if (cardNumber.Length == 16 &&
-                     (cardNumber.StartsWith("51") || cardNumber.StartsWith("52") || cardNumber.StartsWith("53")
-                      || cardNumber.StartsWith("54") || cardNumber.StartsWith("55"))
-                     || (Int32.Parse(cardNumber.Substring(1, 4)) > 2221 && Int32.Parse(cardNumber.Substring(1, 4)) < 2720))
-            {
-                return CreditCardType.MasterCard;
-            }
-
-            else
-            {
-                //Card type is not supported by our system, return null 
                 return null;
             }
         }
