@@ -5,7 +5,7 @@ namespace Intersections.Billing.Support
     /// <summary>
     /// Helper class to support the functionality
     /// </summary>
-    public class Utility
+    internal class Utility
     {
         /// <summary>
         /// Visa: Starts with 4
@@ -23,7 +23,7 @@ namespace Intersections.Billing.Support
         /// </summary>
         /// <param name="cardNum"></param>
         /// <returns></returns>
-        public static CreditCardType? GetCardTypeFromNumber(string cardNum)
+        internal static CreditCardType? GetCardTypeFromNumber(string cardNum)
         {
             //Create new instance of Regex comparer with our
             //credit card regex pattern

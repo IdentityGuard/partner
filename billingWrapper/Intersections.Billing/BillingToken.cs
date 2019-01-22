@@ -39,7 +39,7 @@ namespace Intersections.Billing
                 }
                 else
                 {
-                    BillingGateway billingGateway = getBillingGateway();
+                    BillingGateway billingGateway = GatewayFactory.getBillingGateway(billingProvider);
 
                     return await billingGateway.getBillingToken(tokenRequest, isPreProd);
                 }
@@ -50,17 +50,6 @@ namespace Intersections.Billing
                 tokenResponse.addError(new Error("unknown", "Unknown Exception"));
                 return tokenResponse;
             }
-        }
-
-        /// <summary>
-        /// Get Billing Gateway based on Billing Provider
-        /// </summary>
-        /// <returns></returns>
-        private BillingGateway getBillingGateway()
-        {
-            GatewayFactory factory = new GatewayFactory();
-            if (billingProvider == "recurly")
-                return factory.getBillingGateway(billingProvider);
         }
     }
 }

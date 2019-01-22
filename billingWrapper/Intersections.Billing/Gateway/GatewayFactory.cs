@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Intersections.Billing.Gateway
 {
-    class GatewayFactory
+    internal class GatewayFactory
     {
-        public BillingGateway getBillingGateway(string gateway)
+        protected internal static BillingGateway getBillingGateway(string gateway)
         {
             if (gateway == "recurly")
             {

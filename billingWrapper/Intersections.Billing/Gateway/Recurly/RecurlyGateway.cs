@@ -77,7 +77,7 @@ namespace Intersections.Billing.Gateway.Recurly
             //setup request data
             var formContent = new[]
                 {
-                new KeyValuePair<string, string>("number", Convert.ToString(request.cardNumber)),
+                new KeyValuePair<string, string>("number", Convert.ToString(request.cardNumber.Replace("-",""))),
                 new KeyValuePair<string, string>("year", Convert.ToString(request.expirationYear)),
                 new KeyValuePair<string, string>("month", Convert.ToString(request.expirationMonth)),
                 new KeyValuePair<string, string>("cvv", Convert.ToString(request.cardCVV)),

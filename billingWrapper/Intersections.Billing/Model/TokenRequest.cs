@@ -1,10 +1,5 @@
 ﻿using Intersections.Billing.Properties;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Intersections.Billing.Model
 {
@@ -17,7 +12,7 @@ namespace Intersections.Billing.Model
             , ErrorMessageResourceName = "cardNumberRequired")]
         [StringLength(20, MinimumLength = 9, ErrorMessageResourceType = typeof(ValidationMessages)
             , ErrorMessageResourceName = "cardNumberLength")]
-        [RegularExpression("^[0-9]+$", ErrorMessageResourceType = typeof(ValidationMessages)
+        [RegularExpression("^[-0-9]+$", ErrorMessageResourceType = typeof(ValidationMessages)
             , ErrorMessageResourceName = "cardNumberInvalid")]
         public string cardNumber { get; private set; }
 
@@ -123,11 +118,11 @@ namespace Intersections.Billing.Model
             this.cardCVV = cardCVV;
             this.firstName = firstName;
             this.lastName = lastName;
-            this.street1 = street1;            
+            this.street1 = street1;
             this.city = city;
             this.state = state;
             this.postalCode = postalCode;
             this.country = country;
-        }        
+        }
     }
 }
