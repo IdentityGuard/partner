@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gateway\GatewayFactory.cs" />
+    <Compile Include="Model\BillingAddress.cs" />
+    <Compile Include="Model\BillingInfo.cs" />
+    <Compile Include="Model\CreditCard.cs" />
+    <Compile Include="Model\Error.cs" />
     <Compile Include="Properties\AppSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -64,6 +69,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ValidationMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Support\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

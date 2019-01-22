@@ -1,14 +1,8 @@
 ﻿using Intersections.Billing.Gateway;
-using Intersections.Billing.Gateway.Recurly;
 using Intersections.Billing.Model;
-using Intersections.Billing.Model.Recurly;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Configuration;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Intersections.Billing
@@ -36,36 +30,26 @@ namespace Intersections.Billing
 
                 if (!isValid)
                 {
-                    TokenResponse tokenResponse = new TokenResponse();                    
+                    TokenResponse tokenResponse = new TokenResponse();
                     foreach (var validationResult in results)
                     {
                         tokenResponse.addError(new Error(string.Join(", ", validationResult.MemberNames), validationResult.ErrorMessage));
-                    }                    
+                    }
                     return await Task.FromResult<TokenResponse>(tokenResponse);
                 }
                 else
                 {
-                    BillingGateway billingGateway = getBillingGateway();
+                    BillingGateway billingGateway = GatewayFactory.getBillingGateway(billingProvider);
 
                     return await billingGateway.getBillingToken(tokenRequest, isPreProd);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 TokenResponse tokenResponse = new TokenResponse();
                 tokenResponse.addError(new Error("unknown", "Unknown Exception"));
                 return tokenResponse;
             }
-        }  
-     
-        /// <summary>
-        /// Get Billing Gateway based on Billing Provider
-        /// </summary>
-        /// <returns></returns>
-        private BillingGateway getBillingGateway()
-        {
-            if (billingProvider == "recurly")
-                return new RecurlyGateway();
         }
     }
 }
