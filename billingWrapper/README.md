@@ -19,7 +19,9 @@ private async void method()
   bool isPreProd = true;    // read from config file or as desired        
  
   TokenResponse response = await billingToken.get(request, isPreProd);
-   
+  BillingInfo billingInfo = response.billingInfo;
+  //use this billingInfo as desired
+  
   if (response.errors != null)
   {                
     foreach (var error in response.errors)
