@@ -12,17 +12,14 @@ using Intersections.Billing.Model;
  
 private async void method() 
 {
-  TokenRequest request = new TokenRequest(textCardNumber.Text.Trim().Replace("-", ""),
-                textYear.Text.Trim(), textMonth.Text.Trim(), textCVV.Text.Trim()
-                , textFirstName.Text.Trim(), textLastName.Text.Trim(), textAddress1.Text.Trim(), textCity.Text.Trim()
-                , textState.Text.Trim(), textPostalCode.Text.Trim(), textCountry.Text.Trim());
-
-  BillingToken billingToken = new BillingToken();
-  bool isPreProd = true; // read from config file or as desired 
-
-  TokenResponse response = await billingToken.get(request, isPreProd);
-  textResult.Text = JsonConvert.SerializeObject(response, Formatting.Indented);
+  TokenRequest request = new TokenRequest(cardNumber, expirationYear, expirationMonth, cardCVV
+            , firstName, lastName, street1, city, state, postalCode, country);
  
+  BillingToken billingToken = new BillingToken();            
+  bool isPreProd = true;    // read from config file or as desired        
+ 
+  TokenResponse response = await billingToken.get(request, isPreProd);
+   
   if (response.errors != null)
   {                
     foreach (var error in response.errors)
