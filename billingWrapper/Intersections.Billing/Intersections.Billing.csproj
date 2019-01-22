@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gateway\GatewayFactory.cs" />
     <Compile Include="Model\BillingAddress.cs" />
     <Compile Include="Model\BillingInfo.cs" />
     <Compile Include="Model\CreditCard.cs" />
