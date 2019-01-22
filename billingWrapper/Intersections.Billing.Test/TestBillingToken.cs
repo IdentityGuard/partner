@@ -1,14 +1,6 @@
 ﻿using Intersections.Billing.Model;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Intersections.Billing.Test
@@ -26,7 +18,7 @@ namespace Intersections.Billing.Test
             textErrors.Clear();
             textResult.Clear();
 
-            TokenRequest request = new TokenRequest(textCardNumber.Text.Trim().Replace("-", ""),
+            TokenRequest request = new TokenRequest(textCardNumber.Text.Trim(),
                 textYear.Text.Trim(), textMonth.Text.Trim(), textCVV.Text.Trim()
                 , textFirstName.Text.Trim(), textLastName.Text.Trim(), textAddress1.Text.Trim(), textCity.Text.Trim()
                 , textState.Text.Trim(), textPostalCode.Text.Trim(), textCountry.Text.Trim());
