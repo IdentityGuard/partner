@@ -1,0 +1,38 @@
+{
+    "companyUserId":"01683425-fb78-11e9-a925-0242725dab18",
+	"offerCode":"9pkjqle71i",
+	"name":{
+		"first":"Divya",
+		"last":"Jayaraman"},
+	"address":{
+		"street1":"3901 Stonecroft Blvd",
+		"street2":null,
+		"city":"Chantilly",
+		"state":"VA",
+		"zip":"20151"},
+	"emailAddress":"ps21@intersections.com",
+	"phoneNumber":"7031232345",
+	"birthDate":"1980-01-01",
+	"ssn":"123426509",
+	"billingInfo":{
+		"token":"UXvAbJYGfQWp5lHHkaSNCA",
+		"useHomeAddress":false,
+		"address":{
+			"street1":"3901 Stonecroft Blvd",
+			"street2":null,
+			"city":"Chantilly",
+			"state":"VA",
+			"zip":"20151"},
+		"creditCard":{
+			"expirationMonth":"06",
+			"expirationYear":"2019",
+			"type":"mastercard",
+			"lastFour":"1111"}
+		},
+	"authorizations":[
+		{"type":"DIGITAL_SIGNATURE",
+		"acceptedAt":"2019-01-08T17:16:45Z"},
+		{"type":"BILLING",
+		"acceptedAt":"2019-01-08T17:16:45Z"}
+		]
+}
