@@ -50,7 +50,7 @@ namespace Intersections.Billing.Model
 
         [Required(ErrorMessageResourceType = typeof(ValidationMessages)
             , ErrorMessageResourceName = "lastNameRequired")]
-        [RegularExpression(@"^[A-Za-z]*$", ErrorMessageResourceType = typeof(ValidationMessages)
+        [RegularExpression(@"^[A-Za-z-]*$", ErrorMessageResourceType = typeof(ValidationMessages)
             , ErrorMessageResourceName = "lastNameInvalid")]
         [StringLength(40, MinimumLength = 2, ErrorMessageResourceType = typeof(ValidationMessages)
             , ErrorMessageResourceName = "lastNameLength")]
